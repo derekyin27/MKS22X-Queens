@@ -19,6 +19,21 @@ public class QueenBoard{
     return str;
   }
 
+  private boolean addQueen(int r, int c){
+    if (r >= board.length || c >= board[0].length){
+      return false;
+    }
+    
+  }
+
+  public boolean solve(){
+
+  }
+
+  public boolean countSolutions(){
+
+  }
+
 public static void main(String[] args) {
   QueenBoard test = new QueenBoard(10);
   System.out.println(test);
