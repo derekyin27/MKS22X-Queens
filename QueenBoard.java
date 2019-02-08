@@ -38,12 +38,17 @@ public String integersBoard(){
     }
     else{
       for (int row = 0; row < board.length; row++){
-        board[row][c] = 1;
+        board[row][c]++;
       }
-      for (int col =0; col <board[0].length; col++){
-        board[r][col] = 1;
+      for (int col = 0; col < board[0].length; col++){
+        board[r][col]++;
       }
-      //for (int row = )
+      for (int i = 1; i+c <board[0].length; i++){
+        board[r][c+i]++;
+      }
+      for (int i = 1; i+r <board.length; i++){
+        board[r+1][c]++;
+      }
       board[r][c] = -1;
       return true;
     }
@@ -60,7 +65,7 @@ public String integersBoard(){
 
 public static void main(String[] args) {
   QueenBoard test = new QueenBoard(10);
-  test.addQueen(1, 5);
+  test.addQueen(3, 5);
   System.out.println(test);
   System.out.println(test.integersBoard());
 }
