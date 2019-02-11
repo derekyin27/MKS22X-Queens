@@ -30,9 +30,6 @@ public String integersBoard(){
   return str;
 }
   private boolean addQueen(int r, int c){
-    if (r >= board.length || c >= board[0].length || c < 0 || r < 0){
-      throw new IndexOutOfBoundsException();
-    }
     if (board[r][c] != 0){
       return false;
     }
@@ -66,9 +63,6 @@ public String integersBoard(){
   }
 
   private boolean removeQueen(int r, int c){
-    if (r >= board.length || c >= board[0].length || c < 0 || r < 0){
-      throw new IndexOutOfBoundsException();
-    }
     if (board[r][c] != -1){
       return false;
     }
@@ -106,6 +100,22 @@ public String integersBoard(){
        if (board[r][c] != 0) throw new IllegalStateException();
      }
    }
+   return solveH(0);
+}
+
+private boolean solveH(int c){
+  if (c>=board.length){
+    return true;
+  }
+  for (int r = 0; r < board.length; r++){
+    if(addQueen(r,c)){
+      if (solveH(c+1)){
+        return true;
+      }
+      removeQueen(r, c);
+    }
+  }
+  return false;
 }
 
 //  public boolean countSolutions(){
@@ -114,11 +124,7 @@ public String integersBoard(){
 
 public static void main(String[] args) {
   QueenBoard test = new QueenBoard(10);
-  test.addQueen(3, 5);
-  System.out.println(test);
-  System.out.println(test.integersBoard());
-  test.removeQueen(3, 5);
-  System.out.println(test);
-  System.out.println(test.integersBoard());
+  test.solve();
+  System.out.print(test);
 }
 }
