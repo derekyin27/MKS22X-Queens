@@ -40,7 +40,7 @@ public String integersBoard(){
       for (int row = 0; row < board.length; row++){
         board[row][c]++;
       }
-      for (int col = 0; col < board[0].length; col++){
+      for (int col = 0; col < board.length; col++){
         board[r][col]++;
       }
       for (int row = r, col = c; row < board.length && col < board.length; row++, col++){
@@ -65,6 +65,41 @@ public String integersBoard(){
 
   }
 
+  private boolean removeQueen(int r, int c){
+    if (r >= board.length || c >= board[0].length || c < 0 || r < 0){
+      throw new IndexOutOfBoundsException();
+    }
+    if (board[r][c] != -1){
+      return false;
+    }
+    else{
+      for (int row = 0; row < board.length; row++){
+        board[row][c]--;
+      }
+      for (int col = 0; col < board.length; col++){
+        board[r][col]--;
+      }
+      for (int row = r, col = c; row < board.length && col < board.length; row++, col++){
+      if (board[row][col] != -1)
+      board[row][col]--;
+      }
+      for (int row = r, col = c; row >= 0 && col >= 0; row--, col--){
+      if (board[row][col] != -1)
+      board[row][col]--;
+      }
+      for (int row = r, col = c; row >= 0 && col < board.length; row--, col++){
+      if (board[row][col] != -1)
+       board[row][col]--;
+      }
+      for (int row = r, col = c; row < board.length && col >= 0; row++, col--){
+      if (board[row][col] != -1)
+      board[row][col]--;
+      }
+      board[r][c] = 0;
+      return true;
+    }
+  }
+
 //  public boolean solve(){
 
 //  }
@@ -76,6 +111,9 @@ public String integersBoard(){
 public static void main(String[] args) {
   QueenBoard test = new QueenBoard(10);
   test.addQueen(3, 5);
+  System.out.println(test);
+  System.out.println(test.integersBoard());
+  test.removeQueen(3, 5);
   System.out.println(test);
   System.out.println(test.integersBoard());
 }
