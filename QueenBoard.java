@@ -43,12 +43,22 @@ public String integersBoard(){
       for (int col = 0; col < board[0].length; col++){
         board[r][col]++;
       }
-      for (int i = 1; i+c <board[0].length; i++){
-        board[r][c+i]++;
-      }
-      for (int i = 1; i+r <board.length; i++){
-        board[r+1][c]++;
-      }
+      for (int row = r, col = c; row < board.length && col < board.length; row++, col++){
+      if (board[row][col] != -1)
+      board[row][col]++;
+    }
+    for (int row = r, col = c; row >= 0 && col >= 0; row--, col--){
+      if (board[row][col] != -1)
+      board[row][col]++;
+    }
+    for (int row = r, col = c; row >= 0 && col < board.length; row--, col++){
+      if (board[row][col] != -1)
+       board[row][col]++;
+    }
+    for (int row = r, col = c; row < board.length && col >= 0; row++, col--){
+      if (board[row][col] != -1)
+      board[row][col]++;
+    }
       board[r][c] = -1;
       return true;
     }
