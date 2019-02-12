@@ -19,6 +19,14 @@
     return str;
   }
 
+  private void clear(){
+    for (int r =0; r < board.length; r++){
+      for (int c =0; c < board.length; c++){
+        board[r][c] = 0;
+      }
+    }
+  }
+
 public String integersBoard(){
   String str = "";
   for (int r = 0; r < board.length; r++){
@@ -118,13 +126,32 @@ private boolean solveH(int c){
   return false;
 }
 
-//  public boolean countSolutions(){
+  public int countSolutions(){
+    clear();
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board.length; c++){
+        if (board[r][c] != 0) throw new IllegalStateException();
+      }
+    }
+    return countH(0);
+  }
 
-//  }
+  private int countH(int c){
+    if (c >= board.length) return 1;
+    int counter = 0;
+    for (int r = 0; r < board.length; r++){
+      if (addQueen(r, c)){
+        counter += countH(c+1);
+        removeQueen(r, c);
+      }
+    }
+    return counter;
+  }
 
 public static void main(String[] args) {
   QueenBoard test = new QueenBoard(10);
   test.solve();
   System.out.print(test);
+  System.out.println(test.countSolutions());
 }
 }
